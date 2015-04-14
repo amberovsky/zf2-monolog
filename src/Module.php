@@ -1,50 +1,44 @@
 <?php
 /**
- * @author Zanton Zagorskiy amberovsky@gmail.com
+ * @author Anton Zagorskiy amberovsky@gmail.com
  */
 
-namespace ZfcTwig;
+namespace Amberovsky\Monolog;
 
-use InvalidArgumentException;
-use Zend\EventManager\EventInterface;
-use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\Loader\StandardAutoloader;
+use Zend\EventManager\EventInterface;
 
-class Module implements
-	BootstrapListenerInterface,
-	ConfigProviderInterface
-{
-	public function onBootstrap(EventInterface $e)
-	{
-		/** @var \Zend\Mvc\MvcEvent $e*/
-		$application    = $e->getApplication();
-		$serviceManager = $application->getServiceManager();
-		$environment    = $serviceManager->get('Twig_Environment');
+/**
+ * Module
+ */
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface, \Zend\ModuleManager\Feature\BootstrapListenerInterface {
 
-		/** @var \ZfcTwig\moduleOptions $options */
-		$options = $serviceManager->get('ZfcTwig\ModuleOptions');
+    public function onBootstrap(EventInterface $e)
+    {
+        /** @var \Zend\Mvc\MvcEvent $e*/
+        $application    = $e->getApplication();
+        $serviceManager = $application->getServiceManager();
+    }
 
-		// Setup extensions
-		foreach ($options->getExtensions() as $extension) {
-			// Allows modules to override/remove extensions.
-			if (empty($extension)) {
-				continue;
-			} else if (is_string($extension)) {
-				if ($serviceManager->has($extension)) {
-					$extension = $serviceManager->get($extension);
-				} else {
-					$extension = new $extension();
-				}
-			} elseif (!is_object($extension)) {
-				throw new InvalidArgumentException('Extensions should be a string or object.');
-			}
+    /**
+     * @inheritDoc
+     */
+    public function getAutoloaderConfig() {
+        return [
+            StandardAutoloader::class   => [
+                'namespaces'    => [
+                    __NAMESPACE__   => __DIR__ . '/' . __NAMESPACE__,
+                ],
+            ]
+        ];
+    }
 
-			$environment->addExtension($extension);
-		}
-	}
-
-	public function getConfig()
-	{
+    /**
+     * @inheritDoc
+     */
+	public function getConfig() {
 		return include __DIR__ . '/../config/module.config.php';
 	}
 }

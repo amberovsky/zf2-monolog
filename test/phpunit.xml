@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+        bootstrap               = "Bootstrap.php"
+        colors                  = "true"
+        debug                   = "true"
+        verbose                 = "true"
+        report-useless-tests    = "true"
+        strict-coverage         = "true"
+        disallow-test-output    = "true"
+        enforce-time-limit      = "true"
+        >
+    <testsuites>
+        <testsuite name="Amberovsky\\Monolog test suite">
+            <directory>MonologTest</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
