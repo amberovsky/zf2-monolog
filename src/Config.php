@@ -9,6 +9,10 @@ namespace Amberovsky\Monolog;
  * Configuration
  */
 class Config {
+	/** name of monolog configuration part */
+	const
+		CONFIG_MONOLOG	= 'monolog';
+
     /** global section names */
     const
         SECTION_HANDLERS    = 'handlers', // handlers section

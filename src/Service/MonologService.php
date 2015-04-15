@@ -6,6 +6,7 @@
 namespace Amberovsky\Monolog\Service;
 
 use Amberovsky\Monolog\MonologFactory;
+use Amberovsky\Monolog\Config;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -20,6 +21,9 @@ class MonologService implements FactoryInterface {
      * @return MonologFactory
      */
     public function createService(ServiceLocatorInterface $ServiceLocator) {
-        return new MonologFactory(isset($ServiceLocator->get('config')['123']) ? [] : []);
+        return new MonologFactory(isset($ServiceLocator->get('config')[Config::CONFIG_MONOLOG])
+			? $ServiceLocator->get('config')[Config::CONFIG_MONOLOG] :
+			[]
+		);
     }
 }

@@ -8,7 +8,7 @@
 return [
 	'service_manager' => [
 		'factories'	=> [
-            'MonologFactory'    => Amberovsky\Monolog\Service\MonologService::class
+            'Amberovsky\\Monolog\\MonologFactory'	=> Amberovsky\Monolog\Service\MonologService::class
 		]
 	]
 ];
