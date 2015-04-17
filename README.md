@@ -11,9 +11,8 @@
 ```
 
 # Usage
-
-## Add `Monolog` to your `config/application.config.php`.
-## Configure loggers (`config/logs.php`):
+* Add `Monolog` to your `config/application.config.php`.
+* Configure loggers (`config/logs.php`):
 
 ```php
 use Amberovsky\Monolog\Config;
@@ -44,7 +43,7 @@ return [
 
 ```
 
-## Write to log:
+* Write to log:
 ```php
 use \Amberovsky\Monolog\MonologFactoryTrait;
 
