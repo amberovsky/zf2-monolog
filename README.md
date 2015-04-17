@@ -45,7 +45,7 @@ return [
 
 * Write to log:
 ```php
-use \Amberovsky\Monolog\MonologFactoryTrait;
+use Amberovsky\Monolog\MonologFactoryTrait;
 
 class Whatever {
     use MonologFactoryTrait;
