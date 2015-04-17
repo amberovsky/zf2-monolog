@@ -14,6 +14,7 @@
 
 1. Add `Monolog` to your `config/application.config.php`.
 2. Configure loggers (`config/logs.php`):
+
 ```php
 use Amberovsky\Monolog\Config;
 use Monolog\Handler\StreamHandler;
@@ -42,6 +43,7 @@ return [
 ];
 
 ```
+
 3. Write to log:
 ```php
 use \Amberovsky\Monolog\MonologFactoryTrait;
