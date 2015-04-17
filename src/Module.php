@@ -11,7 +11,6 @@ use Zend\Loader\StandardAutoloader;
 use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Module
@@ -25,16 +24,12 @@ class Module implements
 
 	use MonologFactoryTrait;
 
-	/** @var  ServiceLocatorInterface */
-	protected $ServiceLocator;
-
 	/**
 	 * @inheritDoc
 	 */
     public function onBootstrap(EventInterface $MvcEvent) {
         /** @var MvcEvent $MvcEvent*/
-        $this->ServiceLocator = $MvcEvent->getApplication()->getServiceManager();
-		$this->getMonologFactory();
+		$this->getMonologFactory($MvcEvent->getApplication()->getServiceManager());
     }
 
     /**

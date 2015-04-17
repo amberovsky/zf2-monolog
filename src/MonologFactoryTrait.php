@@ -26,13 +26,17 @@ trait MonologFactoryTrait {
 	}
 
 	/**
+     * @param ServiceLocatorInterface|null $ServiceLocator
+     *
 	 * @return MonologFactory
 	 *
 	 * @throws RuntimeException
 	 */
-	public function getMonologFactory() {
+	public function getMonologFactory(ServiceLocatorInterface $ServiceLocator = null) {
 		if (is_null($this->MonologFactory)) {
-			if (($this instanceof ServiceLocatorAwareInterface) || method_exists($this, 'getServiceLocator')) {
+            if (!is_null($ServiceLocator)) {
+                $this->MonologFactory = $ServiceLocator->get('Amberovsky\\Monolog\\MonologFactory');
+            } elseif (($this instanceof ServiceLocatorAwareInterface) || method_exists($this, 'getServiceLocator')) {
 				$this->MonologFactory = $this->getServiceLocator()->get('Amberovsky\\Monolog\\MonologFactory');
 			} elseif (
 				property_exists($this, 'serviceLocator') &&

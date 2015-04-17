@@ -5,6 +5,8 @@
 
 namespace Amberovsky\Monolog;
 
+use Zend\ServiceManager\ServiceLocatorInterface;
+
 /**
  * MonologFactoryAware
  */
@@ -17,7 +19,9 @@ interface MonologFactoryAware {
 	public function setMonologFactory(MonologFactory $MonologFactory);
 
 	/**
+     * @param ServiceLocatorInterface|null $ServiceLocator
+     *
 	 * @return MonologFactory
 	 */
-	public function getMonologFactory();
+	public function getMonologFactory(ServiceLocatorInterface $ServiceLocator = null);
 }
