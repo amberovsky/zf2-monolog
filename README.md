@@ -5,7 +5,7 @@
 ```json
 {
     "require": {
-        "amberovsky/zf2-monolog": "~0.1"
+        "amberovsky/zf2-monolog": "~0"
     }
 }
 ```
@@ -17,6 +17,7 @@
 ```php
 use Amberovsky\Monolog\Config;
 use Monolog\Handler\StreamHandler;
+use Formatter;
 
 return [
 	'monolog'	=> [
@@ -24,11 +25,18 @@ return [
             Config::SECTION_HANDLERS    => [
                 [
                     Config::HANDLER_CLASS   => StreamHandler::class,
-                    Config::SECTION_ARGS    => [
-                        'path'  => '/var/log/root.log'
-                    ]
+                    Config::HANDLER_ARGS    => [
+                        'path'  => '/var/log/root.log',
+                    ],
+                    
+                    config::HANDLER_FORMATTER   => [
+                        Config::FORMATTER_CLASS => Formatter::class,
+                        Config::FORMATTER_ARGS  => [
+                            
+                        ]
+                    ],
                 ],
-            ]
+            ],
         ]
 	]
 ];
