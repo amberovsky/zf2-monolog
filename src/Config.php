@@ -16,15 +16,16 @@ class Config {
     /** global section names */
     const
         SECTION_HANDLERS    = 'handlers', // handlers section
-        SECTION_PROCESSORS  = 'processors', // processors section
-        SECTION_ARGS        = 'args'; // arguments
+        SECTION_PROCESSORS  = 'processors'; // processors section
 
     /** options for handler */
     const
         HANDLER_CLASS       = 'class', // handler class
+        HANDLER_ARGS        = 'args', // handler args
         HANDLER_FORMATTER   = 'formatter'; // formatter section
 
     /** options for formatter */
     const
-        FORMATTER_CLASS = 'class'; // formatter class
+        FORMATTER_CLASS = 'class', // formatter class
+        FORMATTER_ARGS  = 'args'; // formatter args
 }

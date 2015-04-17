@@ -44,14 +44,14 @@ class MonologFactory {
             throw new FormatterClassMissingException('Formatter class is missing for [' . $Logger->getName() . '] log');
         }
 
-        if (!isset($config[Config::SECTION_ARGS])) {
+        if (!isset($config[Config::FORMATTER_ARGS])) {
             throw new SectionArgsMissingException('Section args is missing for formatter [' . $Logger->getName() .
                 '] log');
         }
 
         $Reflector = new ReflectionClass($config[Config::FORMATTER_CLASS]);
         /** @var FormatterInterface $AbstractFormatter */
-        $AbstractFormatter = $Reflector->newInstanceArgs($config[Config::FORMATTER_CLASS]);
+        $AbstractFormatter = $Reflector->newInstanceArgs($config[Config::FORMATTER_ARGS]);
 
         $AbstractHandler->setFormatter($AbstractFormatter);
     }
@@ -69,13 +69,13 @@ class MonologFactory {
                 throw new HandlerClassMissingException('Handler class is missing for [' . $Logger->getName() . '] log');
             }
 
-            if (!isset($handlerConfig[Config::SECTION_ARGS])) {
+            if (!isset($handlerConfig[Config::HANDLER_ARGS])) {
                 throw new SectionArgsMissingException('Section args is missing for [' . $Logger->getName() . '] log');
             }
 
             $Reflector = new ReflectionClass($handlerConfig[Config::HANDLER_CLASS]);
             /** @var HandlerInterface $AbstractHandler */
-            $AbstractHandler = $Reflector->newInstanceArgs($handlerConfig[Config::SECTION_ARGS]);
+            $AbstractHandler = $Reflector->newInstanceArgs($handlerConfig[Config::HANDLER_ARGS]);
 
             if (isset($handlerConfig[Config::HANDLER_FORMATTER])) {
                 $this->configureFormatter($Logger, $AbstractHandler, $handlerConfig[Config::HANDLER_FORMATTER]);
